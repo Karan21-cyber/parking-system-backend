@@ -24,5 +24,4 @@ app.use("/api/booking", bookingRoutes);
 
 // app.listen(5000,() => console.log("Server running in port 5000."));
 
-module.exports = app;
 module.exports.handler = serverless(app);
