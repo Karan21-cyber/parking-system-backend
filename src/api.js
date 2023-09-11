@@ -16,12 +16,12 @@ app.use(express.json());
 app.use(cors());
 
 // Define your routes
-app.use("/api/user", userRoutes);
-app.use("/api/location", locationRoutes);
-app.use("/api/space", spaceRoutes);
-app.use("/api/reserve", reserveRoutes);
-app.use("/api/payment", paymentRoutes);
-app.use("/api/booking", bookingRoutes);
+app.use("/user", userRoutes);
+app.use("/location", locationRoutes);
+app.use("/space", spaceRoutes);
+app.use("/reserve", reserveRoutes);
+app.use("/payment", paymentRoutes);
+app.use("/booking", bookingRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
