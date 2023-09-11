@@ -7,10 +7,14 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.2.4",
     "nodemon": "^2.0.22",
-    "stripe": "^12.9.0"
+    "stripe": "^12.9.0",
+    "netlify-cli": "16.0.2",
+    "netlify-lambda": "^3.0.1",
+    "serverless-http": "3.2.0"
   },
   "scripts": {
-    "start": "nodemon"
+    "start": "nodemon",
+    "build":"netlify build index.js"
   },
   "name": "backend",
   "version": "1.0.0",
