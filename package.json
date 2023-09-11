@@ -6,21 +6,22 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.2.4",
+    "netlify-lambda": "^2.0.16",
     "nodemon": "^2.0.22",
-    "stripe": "^12.9.0",
-    "netlify-cli": "16.0.2",
-    "netlify-lambda": "^3.0.1",
-    "serverless-http": "3.2.0"
+    "serverless-http": "^3.2.0",
+    "stripe": "^12.9.0"
   },
   "scripts": {
-    "start": "nodemon",
-    "build":"netlify build index.js"
+    "start": "cross-env NODE_ENV=development netlify-lambda serve src",
+    "build": "cross-env NODE_ENV=production netlify-lambda serve src"
   },
   "name": "backend",
   "version": "1.0.0",
-  "main": "index.js",
-  "devDependencies": {},
+  "main": "./src/api.js",
   "author": "Karan",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
 }
