@@ -1,6 +1,5 @@
 const express = require('express');
 const dbconnect = require("./db/config");
-const serverless = require('serverless-http');
 const cors = require("cors");
 
 const app = express();
@@ -23,6 +22,5 @@ app.use("/api/payment",paymentRoutes);
 app.use("/api/booking",bookingRoutes)
 
 
-// app.listen(5000,() => console.log("Server running in port 5000."));
+app.listen(5000,() => console.log("Server running in port 5000."));
 
-module.exports.handler = serverless(app);
