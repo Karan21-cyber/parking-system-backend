@@ -7,7 +7,7 @@ const addbooking = async (req, res) => {
     const { user, location, space, slotNo } = req.body;
 
     if (!user || !location || !space || !slotNo) {
-      res.status(400).json({ error: "All Fields are required" });
+      return res.status(400).json({ error: "All Fields are required" });
     }
     const booking = await Booking.create({
       user,
@@ -26,7 +26,7 @@ const addbooking = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    return res.status(400).json({ error: error.message });
   }
 };
 
@@ -40,7 +40,7 @@ const singlebooking = async (req, res) => {
       res.status(200).json(data);
     }
   } catch (error) {
-    res.status(400).json({ error: "unable to fetch single data" });
+    return res.status(400).json({ error: "unable to fetch single data" });
   }
 };
 
@@ -52,7 +52,7 @@ const fetchBooking = async (req, res) => {
       res.status(201).json(data);
     }
   } catch (error) {
-    res.status(400).json({ error: "unable to fetch all data" });
+    return res.status(400).json({ error: "unable to fetch all data" });
   }
 };
 
@@ -63,10 +63,10 @@ const removeBooking = async (req, res) => {
     const remove = await Booking.deleteOne({ _id: bookingId });
 
     if (remove) {
-      res.status(201).json(remove);
+     return  res.status(201).json(remove);
     }
   } catch (error) {
-    res.status(400).json({ Error: "Unable to remove booking" });
+    return res.status(400).json({ Error: "Unable to remove booking" });
   }
 };
 

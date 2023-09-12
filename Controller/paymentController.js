@@ -26,7 +26,7 @@ const addPayment = async (req, res) => {
       !amount ||
       !reserve
     ) {
-      res.status(400).json({ error: "All fields are required" });
+     return res.status(400).json({ error: "All fields are required" });
     }
 
     const paymentExist = await Payment.find({
@@ -54,10 +54,10 @@ const addPayment = async (req, res) => {
     });
 
     if (payment) {
-      res.status(201).json(payment);
+     return res.status(201).json(payment);
     }
   } catch (error) {
-    res.status(400).json({ error: "Unable to  insert in payment" });
+    return res.status(400).json({ error: "Unable to  insert in payment" });
   }
 };
 
@@ -70,10 +70,10 @@ const allPayments = async (req, res) => {
       .populate("location")
       .populate("space");
     if (payments) {
-      res.status(200).json(payments);
+    return  res.status(200).json(payments);
     }
   } catch (error) {
-    res.status(400).json({ error: "Unable to fetch data" });
+    return res.status(400).json({ error: "Unable to fetch data" });
   }
 };
 
@@ -85,10 +85,10 @@ const singlePayment = async (req, res) => {
     const payment = await Payment.findOne({ _id: paymentId });
 
     if (payment) {
-      res.status(201).json(payment);
+     return res.status(201).json(payment);
     }
   } catch (error) {
-    res.status(400).json({ error: "unable to fetch single data" });
+    return res.status(400).json({ error: "unable to fetch single data" });
   }
 };
 
@@ -102,10 +102,10 @@ const userReport = async (req, res) => {
       .populate("space");
 
     if (payments) {
-      res.status(200).json(payments);
+     return res.status(200).json(payments);
     }
   } catch (error) {
-    res.status(400).json({ Error: "Unable to fetch data" });
+    return res.status(400).json({ Error: "Unable to fetch data" });
   }
 };
 
