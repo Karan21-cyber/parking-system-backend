@@ -1,16 +1,16 @@
 const express = require("express");
 const serverless = require("serverless-http");
 const cors = require("cors");
-const dbconnect = require("../db/config");
+const dbconnect = require("./db/config");
 
 const app = express();
 
-const userRoutes = require("../Routes/userRoutes");
-const locationRoutes = require("../Routes/locationRoutes");
-const spaceRoutes = require("../Routes/spaceRoutes");
-const reserveRoutes = require("../Routes/reserveRoutes");
-const paymentRoutes = require("../Routes/paymentRoutes");
-const bookingRoutes = require("../Routes/bookingRouter");
+const userRoutes = require("./Routes/userRoutes");
+const locationRoutes = require("./Routes/locationRoutes");
+const spaceRoutes = require("./Routes/spaceRoutes");
+const reserveRoutes = require("./Routes/reserveRoutes");
+const paymentRoutes = require("./Routes/paymentRoutes");
+const bookingRoutes = require("./Routes/bookingRouter");
 
 app.use(express.json());
 app.use(cors());
@@ -23,15 +23,9 @@ app.use("/reserve", reserveRoutes);
 app.use("/payment", paymentRoutes);
 app.use("/booking", bookingRoutes);
 
-app.get("/", (req, res) => {
-  res.send("hello from api!");
+app.get("/", async (req, res) => {
+  return res.send("hello from api!");
 })
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: "Internal Server Error" });
-});
 
 // Connect to the database
 dbconnect()

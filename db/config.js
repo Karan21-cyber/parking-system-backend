@@ -1,4 +1,7 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://127.0.0.1:27017/parkingsystem")
-.then(() => console.log(`connected!`));
+mongoose
+  .connect(
+    "mongodb+srv://KaranMongo:Karan123@cluster0.ofntxvz.mongodb.net//parkingsystem"
+  )
+  .then(() => console.log(`connected to database!`));
