@@ -23,6 +23,10 @@ app.use("/reserve", reserveRoutes);
 app.use("/payment", paymentRoutes);
 app.use("/booking", bookingRoutes);
 
+app.get("/", (req, res) => {
+  res.send("hello from api!");
+})
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);

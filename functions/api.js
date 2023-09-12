@@ -101514,9 +101514,9 @@ try {
 /***/ (function(module, exports, __webpack_require__) {
 
 const express = __webpack_require__(/*! express */ "../node_modules/express/index.js");
-const dbconnect = __webpack_require__(/*! ../db/config */ "../db/config.js");
 const serverless = __webpack_require__(/*! serverless-http */ "../node_modules/serverless-http/serverless-http.js");
 const cors = __webpack_require__(/*! cors */ "../node_modules/cors/lib/index.js");
+const dbconnect = __webpack_require__(/*! ../db/config */ "../db/config.js");
 const app = express();
 const userRoutes = __webpack_require__(/*! ../Routes/userRoutes */ "../Routes/userRoutes.js");
 const locationRoutes = __webpack_require__(/*! ../Routes/locationRoutes */ "../Routes/locationRoutes.js");
@@ -101526,15 +101526,34 @@ const paymentRoutes = __webpack_require__(/*! ../Routes/paymentRoutes */ "../Rou
 const bookingRoutes = __webpack_require__(/*! ../Routes/bookingRouter */ "../Routes/bookingRouter.js");
 app.use(express.json());
 app.use(cors());
-app.use("/api/user", userRoutes);
-app.use("/api/location", locationRoutes);
-app.use("/api/space", spaceRoutes);
-app.use("/api/reserve", reserveRoutes);
-app.use("/api/payment", paymentRoutes);
-app.use("/api/booking", bookingRoutes);
 
-// app.listen(5000,() => console.log("Server running in port 5000."));
+// Define your routes
+app.use("/user", userRoutes);
+app.use("/location", locationRoutes);
+app.use("/space", spaceRoutes);
+app.use("/reserve", reserveRoutes);
+app.use("/payment", paymentRoutes);
+app.use("/booking", bookingRoutes);
+app.get("/", (req, res) => {
+  res.send("hello from api!");
+});
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    error: "Internal Server Error"
+  });
+});
+
+// Connect to the database
+dbconnect().then(() => {
+  console.log("Connected to the database.");
+}).catch(err => {
+  console.error("Database connection error:", err);
+});
+
+// Use serverless to export the app as a serverless function
 module.exports.handler = serverless(app);
 
 /***/ }),
