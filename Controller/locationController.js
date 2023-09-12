@@ -7,7 +7,6 @@ const addLocaiton = async (req, res) => {
 
     if (!locationName || !address || !phone) {
       res.status(400).json({ error: "Fields should not be empty" });
-      throw new Error("Fields should not be empty");
     }
 
     const locationExist = await Location.findOne({ locationName });
@@ -34,7 +33,6 @@ const addLocaiton = async (req, res) => {
     }
   } catch (error) {
     res.status(400).json({ error: "Location Name is already exists" });
-    throw new Error("Location name is already exists");
   }
 };
 
@@ -42,9 +40,9 @@ const addLocaiton = async (req, res) => {
 const allLoaction = async (req, res) => {
   try {
     const locations = await Location.find();
-  return  res.json(locations);
+    res.json(locations);
   } catch (error) {
-   return res.status(400).json({ error: "unable to fetch locations" });
+    res.status(400).json({ error: "unable to fetch locations" });
   }
 };
 
@@ -56,10 +54,10 @@ const singleLocation = async (req, res) => {
     const single = await Location.findOne({ _id: locationId });
 
     if (single) {
-     return res.status(201).json(single);
+      res.status(201).json(single);
     }
   } catch (error) {
-    return res.status(400).json({ error: "Unable to fetch single data" });
+    res.status(400).json({ error: "Unable to fetch single data" });
   }
 };
 
@@ -81,12 +79,12 @@ const updateLocation = async (req, res) => {
     );
 
     if (update) {
-     return res.status(201).json({ update });
+      res.status(201).json({ update });
     } else {
-     return res.status(400).json({ erro: "unable to find an Id" });
+      res.status(400).json({ erro: "unable to find an Id" });
     }
   } catch (error) {
-   return res.status(400).json({
+    res.status(400).json({
       error: "Unable to update your locations",
     });
   }
@@ -100,12 +98,12 @@ const removeLocation = async (req, res) => {
     const remove = await Location.deleteOne({ _id: locationId });
 
     if (remove) {
-     return res.status(201).json(remove);
+      return res.status(201).json(remove);
     } else {
-     return res.status(401).json({ failure: "Unable to find location" });
+      return res.status(401).json({ failure: "Unable to find location" });
     }
   } catch (error) {
-   return res.status(400).json({ error: "Unable to remove your location" });
+    return res.status(400).json({ error: "Unable to remove your location" });
   }
 };
 

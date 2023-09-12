@@ -29,7 +29,7 @@ const addReserve = async (req, res) => {
       !hours ||
       !amount
     ) {
-      return res.status(400).json({ error: "All fields are required" });
+      res.status(400).json({ error: "All fields are required" });
     }
 
     const slotreserve = await Reserve.findOne({ location, space, slotNo });
@@ -49,7 +49,7 @@ const addReserve = async (req, res) => {
       });
 
       if (reserve) {
-        return res.status(201).json({
+         res.status(201).json({
           _id: reserve._id,
           booking: reserve.booking,
           user: reserve.user,
@@ -63,11 +63,11 @@ const addReserve = async (req, res) => {
           amount: reserve.amount,
         });
       } else {
-        return res.status(400).json({ error: "Unable to reserve slots" });
+         res.status(400).json({ error: "Unable to reserve slots" });
       }
     }
   } catch (error) {
-    return res.status(400).json({ error: "Slot is already reserved" });
+     res.status(400).json({ error: "Slot is already reserved" });
   }
 };
 
@@ -80,10 +80,10 @@ const allReserves = async (req, res) => {
       .populate("user", "-password");
 
     if (reserves) {
-     return res.status(201).json(reserves);
+      res.status(201).json(reserves);
     }
   } catch (error) {
-    return res.status(400).json({ error: "Unable to fetch data" });
+     res.status(400).json({ error: "Unable to fetch data" });
   }
 };
 
@@ -97,10 +97,10 @@ const singleReserves = async (req, res) => {
       .populate("user", "-password");
 
     if (reserves) {
-     return res.status(201).json(reserves);
+      res.status(201).json(reserves);
     }
   } catch (error) {
-   return res.status(400).json({ error: "Unable to fetch data" });
+    res.status(400).json({ error: "Unable to fetch data" });
   }
 };
 
@@ -114,10 +114,10 @@ const groupReseve = async (req, res) => {
     });
 
     if (reserve) {
-      return res.status(201).json(reserve);
+      res.status(201).json(reserve);
     }
   } catch (error) {
-   return res.status(400).json({ error: "error occured" });
+    res.status(400).json({ error: "error occured" });
   }
 };
 
@@ -128,10 +128,10 @@ const removeReserve = async (req, res) => {
     const remove = await Reserve.deleteOne({ _id: slotId });
 
     if (remove) {
-     return res.status(201).json(remove);
+      res.status(201).json(remove);
     }
   } catch (error) {
-   return res.status(400).json({ Error: "Unable to remove slots" });
+    res.status(400).json({ Error: "Unable to remove slots" });
   }
 };
 

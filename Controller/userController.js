@@ -6,7 +6,7 @@ const registerUser = async (req, res) => {
   const { name, email, phone, address, password } = req.body;
 
   if (!name || !email || !phone || !address || !password) {
-    return res.status(400).json({ error: "fill all the fields" });
+     res.status(400).json({ error: "fill all the fields" });
   }
 
   const userExists = await User.findOne({ email });
@@ -31,12 +31,12 @@ const registerUser = async (req, res) => {
         token: generateToken(user._id),
       });
     } else {
-      return res.status(400).json({
+       res.status(400).json({
         error: "Unable to create new user",
       });
     }
   } else {
-    return res.status(400).json({ error: "User Already Exists" });
+     res.status(400).json({ error: "User Already Exists" });
   }
 };
 
@@ -47,12 +47,12 @@ const userLogin = async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(400).json({ error: "Please Enter all the fields" });
+       res.status(400).json({ error: "Please Enter all the fields" });
     }
 
     const user = await User.findOne({ email });
     if (user && (await user.matchPassword(password))) {
-     return res.status(201).json({
+      res.status(201).json({
         _id: user._id,
         name: user.name,
         email: user.email,
@@ -62,12 +62,12 @@ const userLogin = async (req, res) => {
         token: generateToken(user._id),
       });
     } else {
-      return res.status(400).json({
+       res.status(400).json({
         error: "Unable to find user",
       });
     }
   } catch (error) {
-    return res.status(400).send("Error Occured user is unable to find");
+     res.status(400).send("Error Occured user is unable to find");
   }
 };
 
@@ -75,9 +75,9 @@ const allUsers = async (req, res) => {
   const data = await User.find({});
 
   if (data) {
-   return res.status(201).json(data);
+    res.status(201).json(data);
   } else {
-   return res.status(400).json({ Error: "Unable to fetch data" });
+    res.status(400).json({ Error: "Unable to fetch data" });
   }
 };
 
