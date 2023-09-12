@@ -80,7 +80,7 @@ const allReserves = async (req, res) => {
       .populate("user", "-password");
 
     if (reserves) {
-      res.status(201).json(reserves);
+     return res.status(201).json(reserves);
     }
   } catch (error) {
     return res.status(400).json({ error: "Unable to fetch data" });
@@ -97,10 +97,10 @@ const singleReserves = async (req, res) => {
       .populate("user", "-password");
 
     if (reserves) {
-      res.status(201).json(reserves);
+     return res.status(201).json(reserves);
     }
   } catch (error) {
-    res.status(400).json({ error: "Unable to fetch data" });
+   return res.status(400).json({ error: "Unable to fetch data" });
   }
 };
 
@@ -114,10 +114,10 @@ const groupReseve = async (req, res) => {
     });
 
     if (reserve) {
-      res.status(201).json(reserve);
+      return res.status(201).json(reserve);
     }
   } catch (error) {
-    res.status(400).json({ error: "error occured" });
+   return res.status(400).json({ error: "error occured" });
   }
 };
 
@@ -128,10 +128,10 @@ const removeReserve = async (req, res) => {
     const remove = await Reserve.deleteOne({ _id: slotId });
 
     if (remove) {
-      res.status(201).json(remove);
+     return res.status(201).json(remove);
     }
   } catch (error) {
-    res.status(400).json({ Error: "Unable to remove slots" });
+   return res.status(400).json({ Error: "Unable to remove slots" });
   }
 };
 

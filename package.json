@@ -10,12 +10,13 @@
     "stripe": "^12.9.0"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=development netlify-lambda serve src",
-    "build": "cross-env NODE_ENV=production netlify-lambda serve src"
+     "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build":"npm i"
   },
   "name": "backend",
   "version": "1.0.0",
-  "main": "./src/api.jszz",
+  "main": "index.js",
   "author": "Karan",
   "license": "ISC",
   "description": "",

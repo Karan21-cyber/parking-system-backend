@@ -42,10 +42,9 @@ const addLocaiton = async (req, res) => {
 const allLoaction = async (req, res) => {
   try {
     const locations = await Location.find();
-    res.json(locations);
+  return  res.json(locations);
   } catch (error) {
-    res.status(400).json({ error: "unable to fetch locations" });
-    throw new Error("Unable to fetch locations");
+   return res.status(400).json({ error: "unable to fetch locations" });
   }
 };
 
@@ -57,10 +56,10 @@ const singleLocation = async (req, res) => {
     const single = await Location.findOne({ _id: locationId });
 
     if (single) {
-      res.status(201).json(single);
+     return res.status(201).json(single);
     }
   } catch (error) {
-    res.status(400).json({ error: "Unable to fetch single data" });
+    return res.status(400).json({ error: "Unable to fetch single data" });
   }
 };
 
@@ -82,15 +81,14 @@ const updateLocation = async (req, res) => {
     );
 
     if (update) {
-      res.status(201).json({ update });
+     return res.status(201).json({ update });
     } else {
-      res.status(400).json({ erro: "unable to find an Id" });
+     return res.status(400).json({ erro: "unable to find an Id" });
     }
   } catch (error) {
-    res.status(400).json({
+   return res.status(400).json({
       error: "Unable to update your locations",
     });
-    throw new Error("Unable to update your locaitons");
   }
 };
 
@@ -102,13 +100,12 @@ const removeLocation = async (req, res) => {
     const remove = await Location.deleteOne({ _id: locationId });
 
     if (remove) {
-      res.status(201).json(remove);
+     return res.status(201).json(remove);
     } else {
-      res.status(401).json({ failure: "Unable to find location" });
+     return res.status(401).json({ failure: "Unable to find location" });
     }
   } catch (error) {
-    res.status(400).json({ error: "Unable to remove your location" });
-    throw new Error("Unable to remove your locations");
+   return res.status(400).json({ error: "Unable to remove your location" });
   }
 };
 

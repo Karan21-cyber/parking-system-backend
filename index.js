@@ -1,5 +1,4 @@
 const express = require("express");
-const serverless = require("serverless-http");
 const cors = require("cors");
 const dbconnect = require("./db/config");
 
@@ -16,25 +15,18 @@ app.use(express.json());
 app.use(cors());
 
 // Define your routes
-app.use("/user", userRoutes);
-app.use("/location", locationRoutes);
-app.use("/space", spaceRoutes);
-app.use("/reserve", reserveRoutes);
-app.use("/payment", paymentRoutes);
-app.use("/booking", bookingRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/location", locationRoutes);
+app.use("/api/space", spaceRoutes);
+app.use("/api/reserve", reserveRoutes);
+app.use("/api/payment", paymentRoutes);
+app.use("/api/booking", bookingRoutes);
 
 app.get("/", async (req, res) => {
   return res.send("hello from api!");
 })
 
-// Connect to the database
-dbconnect()
-  .then(() => {
-    console.log("Connected to the database.");
-  })
-  .catch((err) => {
-    console.error("Database connection error:", err);
-  });
-
-// Use serverless to export the app as a serverless function
-module.exports.handler = serverless(app);
+const PORT = 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
